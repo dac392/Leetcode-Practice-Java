@@ -2,7 +2,6 @@ import java.util.Scanner;
 public class RainWater{
 
 	private int volume(int lower, int upper, int[] height){
-
 		if(height[lower] > height[upper]){
 			int nextBiggest = lower;
 			for(int i = lower+1; i < upper; i++){
@@ -15,15 +14,12 @@ public class RainWater{
 			}
 			lower = nextBiggest;
 		}
-
-
-
 		int answer = 0;
 		int max = (height[lower]<=height[upper])? lower:upper;
 		for(int i = lower+1; i < upper; i++){
 			answer+= height[max]-height[i];
 		}
-		//System.out.println(answer);
+		System.out.println(answer);
 		return answer;
 	}
 
@@ -34,10 +30,9 @@ public class RainWater{
 			if(val >= height[lower])
 				return i;
 
-			if(val>nextHighest)
+			if(nextHighest == -1 || val>height[nextHighest])
 				nextHighest = i;
 		}	
-
 
 		if(nextHighest == lower+1)
 			return -1;
@@ -63,7 +58,7 @@ public class RainWater{
 				upper = lower;
 				continue;
 			}
-			//System.out.print("range: "+lower+","+upper+" :\t");
+			System.out.print("range: "+lower+","+upper+" :\t");
 			water_units+= this.volume(lower, upper, height);
 			lower = upper;
 		}
@@ -82,6 +77,6 @@ public class RainWater{
 			height[i] = Integer.parseInt(csv[i]);
 		}
 		RainWater solution = new RainWater();
-		System.out.println(solution.trap(height));
+		System.out.println("Toal units of water: "+solution.trap(height));
 	}
 }
